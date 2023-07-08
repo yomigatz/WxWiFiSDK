@@ -1,0 +1,29 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+        jcenter()
+        maven { url "https://mirrors.tencent.com/repository/maven/tencent_public" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url "https://jitpack.io" }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+        maven { url "https://mirrors.tencent.com/repository/maven/tencent_public" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url "https://jitpack.io" }
+    }
+}
+rootProject.name = "WxWiFiSDK"
+include ':app'
+include ':LibWifiManager'
