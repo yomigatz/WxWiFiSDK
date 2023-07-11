@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
+import android.util.Log;
 
 import com.common.anni.wifimanager.R;
 import com.common.anni.wifimanager.dialog.WifiLinkDialog;
@@ -79,6 +80,7 @@ public class WifiListSupport {
             if (index == -1 && ("\"" + wifiBean.getWifiName() + "\"").equals(wifiName)) {
                 index = i;
                 wifiInfo.setLevel(wifiBean.getLevel());
+                wifiInfo.setLevelValue(wifiBean.getLevelValue());
                 wifiInfo.setWifiName(wifiBean.getWifiName());
                 wifiInfo.setCapabilities(wifiBean.getCapabilities());
                 if (type == 1) {
@@ -86,6 +88,7 @@ public class WifiListSupport {
                 } else {
                     wifiInfo.setState(WifiConstant.WIFI_STATE_ON_CONNECTING);
                 }
+                wifiInfo.setLock(setPwdState(wifiBean));
             }
         }
         if (index != -1) {
@@ -109,6 +112,7 @@ public class WifiListSupport {
                 wifiBean.setState(WifiConstant.WIFI_STATE_UNCONNECT);   //只要获取都假设设置成未连接，真正的状态都通过广播来确定
                 wifiBean.setCapabilities(scanResults.get(i).capabilities);
                 wifiBean.setLevel(WifiSupport.getLevel(scanResults.get(i).level));
+                wifiBean.setLevelValue(Math.abs(scanResults.get(i).level));
                 wifiBean.setLock(setPwdState(wifiBean));
                 realWifiList.add(wifiBean);
                 //排序
@@ -126,20 +130,23 @@ public class WifiListSupport {
      */
     public boolean setPwdState(WifiBean wifiBean) {
         if (wifiBean == null) return true;
-        if (wifiBean.getState().equals(WifiConstant.WIFI_STATE_UNCONNECT) || wifiBean.getState().equals(WifiConstant.WIFI_STATE_CONNECT)) {
-            String capabilities = wifiBean.getCapabilities();
-            if (WifiSupport.getWifiCipher(capabilities) == WifiSupport.WifiCipherType.WIFICIPHER_NOPASS) {//无需密码
-                return false;
-            } else {   //需要密码，弹出输入密码dialog
-                WifiConfiguration tempConfig = WifiSupport.isExsits(wifiBean.getWifiName(), context);
-                if (tempConfig == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
+        String capabilities = wifiBean.getCapabilities();
+        return WifiSupport.getWifiCipher(capabilities) != WifiSupport.WifiCipherType.WIFICIPHER_NOPASS;
+//        if (wifiBean.getState().equals(WifiConstant.WIFI_STATE_UNCONNECT) || wifiBean.getState().equals(WifiConstant.WIFI_STATE_CONNECT)) {
+//            String capabilities = wifiBean.getCapabilities();
+//            return WifiSupport.getWifiCipher(capabilities) != WifiSupport.WifiCipherType.WIFICIPHER_NOPASS;
+//            if (WifiSupport.getWifiCipher(capabilities) == WifiSupport.WifiCipherType.WIFICIPHER_NOPASS) {//无需密码
+//                return false;
+//            } else {   //需要密码，弹出输入密码dialog
+//                WifiConfiguration tempConfig = WifiSupport.isExsits(wifiBean.getWifiName(), context);
+//                if (tempConfig == null) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
     }
 
 

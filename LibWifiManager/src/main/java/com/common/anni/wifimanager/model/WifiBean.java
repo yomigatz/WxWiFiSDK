@@ -1,71 +1,85 @@
 package com.common.anni.wifimanager.model;
 
+import android.util.Log;
+
 /**
  * WIFI 数据类
  */
 public class WifiBean implements Comparable<WifiBean> {
-  private String wifiName;
-  private int level;
-  private String state;  //已连接  正在连接  未连接 三种状态
-  private String capabilities;//加密方式
-  private boolean lock;//连接时是否需要密码
+    private String wifiName;
+    private int level;
+    private int levelValue;
+    private String state;  //已连接  正在连接  未连接 三种状态
+    private String capabilities;//加密方式
+    private boolean lock;//连接时是否需要密码
 
-  public boolean getLock() {
-    return lock;
-  }
+    public boolean getLock() {
+        return lock;
+    }
 
-  public void setLock(boolean lock) {
-    this.lock = lock;
-  }
+    public void setLock(boolean lock) {
+        Log.d("NRRR", "++++++++++++++++++++++=setLock=" + lock);
 
-  @Override
-  public String toString() {
-    return "WifiBean{" +
-            "wifiName='" + wifiName + '\'' +
-            ", level='" + level + '\'' +
-            ", state='" + state + '\'' +
-            ", capabilities='" + capabilities + '\'' +
-            ", lock=" + lock +
-            '}';
-  }
+        this.lock = lock;
+    }
 
-  public String getCapabilities() {
-    return capabilities;
-  }
+    @Override
+    public String toString() {
+        return "WifiBean{" +
+                "wifiName='" + wifiName + '\'' +
+                ", level='" + level + '\'' +
+                ", levelValue='" + levelValue + '\'' +
+                ", state='" + state + '\'' +
+                ", capabilities='" + capabilities + '\'' +
+                ", lock=" + lock +
+                '}';
+    }
 
-  public void setCapabilities(String capabilities) {
-    this.capabilities = capabilities;
-  }
+    public String getCapabilities() {
+        return capabilities;
+    }
 
-  public String getWifiName() {
-    return wifiName;
-  }
+    public void setCapabilities(String capabilities) {
+        this.capabilities = capabilities;
+    }
 
-  public void setWifiName(String wifiName) {
-    this.wifiName = wifiName;
-  }
+    public String getWifiName() {
+        return wifiName;
+    }
 
-  public int getLevel() {
-    return level;
-  }
+    public void setWifiName(String wifiName) {
+        this.wifiName = wifiName;
+    }
 
-  public void setLevel(int level) {
-    this.level = level;
-  }
+    public int getLevel() {
+        return level;
+    }
 
-  public String getState() {
-    return state;
-  }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-  public void setState(String state) {
-    this.state = state;
-  }
+    public String getState() {
+        return state;
+    }
 
-  @Override
-  public int compareTo(WifiBean o) {
-    int level1 = this.getLevel();
-    int level2 = o.getLevel();
-    return level1 - level2;
-  }
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getLevelValue() {
+        return levelValue;
+    }
+
+    public void setLevelValue(int levelValue) {
+        this.levelValue = levelValue;
+    }
+
+    @Override
+    public int compareTo(WifiBean o) {
+        int level1 = this.getLevel();
+        int level2 = o.getLevel();
+        return level1 - level2;
+    }
 }
 

@@ -38,11 +38,16 @@ public class WifiPermissionSupport {
         return wifiPermissionSupport;
     }
 
+    public void setCanScanWifi(boolean canScanWifi) {
+        this.canScanWifi = canScanWifi;
+    }
+
     boolean canScanWifi = false;
 
     public boolean isCanScanWifi() {
         return canScanWifi;
     }
+
 
     public void check(int gpsCode, Activity activity, int requestCode) {
         if (Build.VERSION.SDK_INT >= 23 && !WifiSupport.isOpenGps(activity)) {
