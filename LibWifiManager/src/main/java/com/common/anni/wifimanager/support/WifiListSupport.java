@@ -7,6 +7,7 @@ import android.net.wifi.WifiInfo;
 import android.util.Log;
 
 import com.common.anni.wifimanager.R;
+import com.common.anni.wifimanager.WifiUtils;
 import com.common.anni.wifimanager.dialog.WifiLinkDialog;
 import com.common.anni.wifimanager.model.WifiBean;
 import com.common.anni.wifimanager.model.WifiConstant;
@@ -89,6 +90,7 @@ public class WifiListSupport {
                     wifiInfo.setState(WifiConstant.WIFI_STATE_ON_CONNECTING);
                 }
                 wifiInfo.setLock(setPwdState(wifiBean));
+                wifiInfo.setIs24G(wifiBean.is24G());
             }
         }
         if (index != -1) {
@@ -112,8 +114,9 @@ public class WifiListSupport {
                 wifiBean.setState(WifiConstant.WIFI_STATE_UNCONNECT);   //只要获取都假设设置成未连接，真正的状态都通过广播来确定
                 wifiBean.setCapabilities(scanResults.get(i).capabilities);
                 wifiBean.setLevel(WifiSupport.getLevel(scanResults.get(i).level));
-                wifiBean.setLevelValue(Math.abs(scanResults.get(i).level));
+                wifiBean.setLevelValue(scanResults.get(i).level);
                 wifiBean.setLock(setPwdState(wifiBean));
+                wifiBean.setIs24G(WifiUtils.is24GHzWifi(scanResults.get(i).frequency));
                 realWifiList.add(wifiBean);
                 //排序
 //        Collections.sort(realWifiList);

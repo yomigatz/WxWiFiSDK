@@ -275,15 +275,17 @@ public class WifiSupport {
     /**
      * 返回level 等级
      */
-    public static int getLevel(int level) {
-        if (Math.abs(level) < 50) {
-            return 1;
-        } else if (Math.abs(level) < 75) {
-            return 2;
-        } else if (Math.abs(level) < 90) {
-            return 3;
-        } else {
+    public static int getLevel(int signalStrength) {
+        if (signalStrength >= -50) {
             return 4;
+        } else if (signalStrength >= -60) {
+            return 3;
+        } else if (signalStrength >= -70) {
+            return 2;
+        } else if (signalStrength >= -80) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 

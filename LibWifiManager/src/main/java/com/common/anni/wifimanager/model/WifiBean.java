@@ -1,7 +1,5 @@
 package com.common.anni.wifimanager.model;
 
-import android.util.Log;
-
 /**
  * WIFI 数据类
  */
@@ -12,15 +10,22 @@ public class WifiBean implements Comparable<WifiBean> {
     private String state;  //已连接  正在连接  未连接 三种状态
     private String capabilities;//加密方式
     private boolean lock;//连接时是否需要密码
+    private boolean is24G;// 是否2.4GHz
 
     public boolean getLock() {
         return lock;
     }
 
     public void setLock(boolean lock) {
-        Log.d("NRRR", "++++++++++++++++++++++=setLock=" + lock);
-
         this.lock = lock;
+    }
+
+    public boolean is24G() {
+        return is24G;
+    }
+
+    public void setIs24G(boolean is24G) {
+        this.is24G = is24G;
     }
 
     @Override

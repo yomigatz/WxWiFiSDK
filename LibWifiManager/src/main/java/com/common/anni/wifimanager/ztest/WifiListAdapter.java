@@ -41,13 +41,14 @@ public class WifiListAdapter extends RecyclerView.Adapter<WifiListAdapter.MyView
     private int getLevel(int level) {
         switch (level) {
             case 4:
-                return R.drawable.wifi_icon0;
-            case 3:
-                return R.drawable.wifi_icon1;
-            case 2:
-                return R.drawable.wifi_icon2;
-            case 1:
                 return R.drawable.wifi_icon3;
+            case 3:
+                return R.drawable.wifi_icon2;
+            case 2:
+                return R.drawable.wifi_icon1;
+            case 0:
+            case 1:
+                return R.drawable.wifi_icon0;
         }
         return R.drawable.wifi_icon3;
     }
